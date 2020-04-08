@@ -1,14 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment.local';
+import { environment } from '../../../environments/environment.local';
 import { User } from '../../admin/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  private readonly tokenKey = 'token';
+
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   login(user: User) {
     user.returnSecureToken = true;
@@ -18,7 +24,16 @@ export class AuthService {
       user
     )
     .pipe(
-      tap((response: any) => localStorage.setItem('token', response.idToken))
+      tap((response: any) => localStorage.setItem(this.tokenKey, response.idToken))
     );
+  }
+
+  isLoggedIn() {
+    return !!localStorage.getItem(this.tokenKey);
+  }
+
+  logOut() {
+    localStorage.removeItem(this.tokenKey);
+    this.router.navigate(['/', 'admin', 'login']);
   }
 }

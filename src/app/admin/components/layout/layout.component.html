@@ -1,2 +1,7 @@
-<p>admin-layout works!</p>
+<div class="header">
+  <h1>ICV Admin Panel</h1>
+  <nav>
+    <a *ngIf="authService.isLoggedIn()" (click)="authService.logOut()">Log Out</a>
+  </nav>
+</div>
 <router-outlet></router-outlet>
