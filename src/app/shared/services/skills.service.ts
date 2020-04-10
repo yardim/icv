@@ -27,7 +27,7 @@ export class SkillsService {
         map(response => {
           let skills: string[] = [];
 
-          for (const id of Object.keys(response)) {
+          for (const id of Object.keys(response || {})) {
             this.skillsId = id;
 
             skills = [
