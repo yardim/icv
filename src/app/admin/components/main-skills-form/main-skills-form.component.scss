@@ -1,0 +1,14 @@
+hr {
+  margin: 15px 0;
+  height: 1px;
+  border: 0;
+  background: #ccc;
+}
+
+.control-wrapper {
+  display: flex;
+
+  .input-flex-wrap {
+    width: 100%;
+  }
+}

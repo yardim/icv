@@ -42,12 +42,26 @@ button {
 
   &:focus,
   &:hover {
-    background: #222;
+    background: #333;
   }
 
   &:active {
-    background: #444;
+    background: #777;
     transition: none;
+  }
+
+  &.secondary {
+    color: #000;
+    background: #ccc;
+
+    &:focus,
+    &:hover {
+      background: #aaa;
+    }
+
+    &:active {
+      background: #888;
+    }
   }
 }
 

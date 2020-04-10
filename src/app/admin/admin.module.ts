@@ -7,9 +7,10 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { LoginComponent } from './pages/login/login.component';
 import { MainComponent } from './pages/main/main.component';
 import { AdminGuard } from './services/admin.guard';
+import { MainSkillsFormComponent } from './components/main-skills-form/main-skills-form.component';
 
 @NgModule({
-  declarations: [LoginComponent, AdminLayoutComponent, MainComponent, LoginFormComponent],
+  declarations: [LoginComponent, AdminLayoutComponent, MainComponent, LoginFormComponent, MainSkillsFormComponent],
   imports: [
     SharedModule,
     AdminRoutingModule,

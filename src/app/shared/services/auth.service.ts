@@ -11,6 +11,10 @@ import { User } from '../../admin/models';
 export class AuthService {
   private readonly tokenKey = 'token';
 
+  get token() {
+    return localStorage.getItem(this.tokenKey);
+  }
+
   constructor(
     private http: HttpClient,
     private router: Router

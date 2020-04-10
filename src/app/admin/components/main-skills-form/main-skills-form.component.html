@@ -1,0 +1,21 @@
+<h2>
+  Main Skills
+  <app-spinner *ngIf="!form"></app-spinner>
+</h2>
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ng-container formArrayName="skills">
+    <div
+      class="control-wrapper"
+      *ngFor="let skill of skills.controls; let i = index"
+    >
+      <div class="input-flex-wrap">
+        <input type="text" [formControlName]="i">
+      </div>
+      <button type="button" (click)="onRemoveSkill(i)">Remove</button>
+    </div>
+  </ng-container>
+  <button type="button" class="secondary" (click)="onAddSkill()">Add Skill</button>
+  <hr>
+  <button>Submit</button>
+  <app-spinner *ngIf="isLoading"></app-spinner>
+</form>
