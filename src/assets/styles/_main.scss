@@ -13,4 +13,8 @@ hr {
   height: 1px;
   border: 0;
   background: #ccc;
+
+  &.big-margins {
+    margin: 30px 0;
+  }
 }

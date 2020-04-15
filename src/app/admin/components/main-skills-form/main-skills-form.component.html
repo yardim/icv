@@ -5,7 +5,7 @@
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <ng-container formArrayName="skills">
     <div
-      class="control-wrapper"
+      class="control-wrapper flex"
       *ngFor="let skill of skills.controls; let i = index"
     >
       <div class="input-flex-wrap">

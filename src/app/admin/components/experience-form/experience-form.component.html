@@ -1,77 +1,104 @@
 <h2>Work Experience</h2>
-<form>
-  <div class="control-wrapper">
-    <input type="text" placeholder="Position">
-  </div>
-  <div class="control-wrapper">
-    <input type="text" placeholder="Period">
-  </div>
-  <div class="control-wrapper">
-    <input type="text" placeholder="Company">
-  </div>
-  <div class="form-subgroup">
-    <div class="title-wrap">
-      <h3>Technologies</h3>
-      <app-plus
-        (click)="toggleTechnologies()"
-        [active]="isTechnologiesExpanded"
-        tooltip="Expand Technologies Section"
-      ></app-plus>
-    </div>
-    <ng-container *ngIf="isTechnologiesExpanded">
+<form [formGroup]="form">
+  <ng-container formArrayName="jobs">
+    <ng-container *ngFor="let job of jobs.controls; let jobIndex = index; let isLast = last" [formGroupName]="jobIndex">
       <div class="control-wrapper">
-        <input type="text" placeholder="Technology">
+        <input type="text" placeholder="Position" formControlName="position">
       </div>
-      <button type="button" class="secondary">Add Technology</button>
-    </ng-container>
-  </div>
-  <div class="form-subgroup">
-    <div class="title-wrap">
-      <h3>Responsibilities</h3>
-      <app-plus
-        (click)="toggleResponsibilities()"
-        [active]="isResponsibilitiesExpanded"
-        tooltip="Expand Responsibilities Section"
-      ></app-plus>
-    </div>
-    <ng-container *ngIf="isResponsibilitiesExpanded">
       <div class="control-wrapper">
-        <input type="text" placeholder="Responsibility">
+        <input type="text" placeholder="Start Date" formControlName="startDate">
       </div>
-      <button type="button" class="secondary">Add Responsibility</button>
-    </ng-container>
-  </div>
-  <div class="form-subgroup">
-    <div class="title-wrap">
-      <h3>Projects</h3>
-      <app-plus
-        (click)="toggleProjects()"
-        [active]="isProjectsExpanded"
-        tooltip="Expand Projects Section"
-      ></app-plus>
-    </div>
-    <ng-container *ngIf="isProjectsExpanded">
       <div class="control-wrapper">
-        <input type="text" placeholder="Project Name">
+        <input type="text" placeholder="End Date" formControlName="endDate">
       </div>
-      <div class="form-subgroup">
-        <h4>Technologies</h4>
-        <div class="control-wrapper">
-          <input type="text" placeholder="Technology">
+      <div class="control-wrapper">
+        <input type="text" placeholder="Company" formControlName="company">
+      </div>
+      <div class="form-subgroup" formArrayName="generalTechnologies">
+        <div class="title-wrap">
+          <h3>Technologies</h3>
+          <app-plus (click)="toggleTechnologies()" [active]="isTechnologiesExpanded"
+            tooltip="Expand Technologies Section"></app-plus>
         </div>
-        <button type="button" class="secondary">Add Technology</button>
+        <ng-container *ngIf="isTechnologiesExpanded">
+          <div class="control-wrapper flex" *ngFor="let generalTech of getGeneralTechnologies(jobIndex).controls; let generalTechIndex = index">
+            <div class="input-flex-wrap">
+              <input type="text" placeholder="Technology" [formControlName]="generalTechIndex">
+            </div>
+            <button type="button">Remove</button>
+          </div>
+          <button type="button" class="secondary" (click)="onAddJobTechnology(jobIndex)">Add Technology</button>
+        </ng-container>
       </div>
-      <div class="form-subgroup">
-        <h4>Responsibilities</h4>
-        <div class="control-wrapper">
-          <input type="text" placeholder="Technology">
+      <div class="form-subgroup" formArrayName="generalResponsibilities">
+        <div class="title-wrap">
+          <h3>Responsibilities</h3>
+          <app-plus (click)="toggleResponsibilities()" [active]="isResponsibilitiesExpanded"
+            tooltip="Expand Responsibilities Section"></app-plus>
         </div>
-        <button type="button" class="secondary">Add Responsibility</button>
+        <ng-container *ngIf="isResponsibilitiesExpanded">
+          <div class="control-wrapper flex" *ngFor="let generalResp of getGeneralResponsibilities(jobIndex).controls; let generalRespIndex = index">
+            <div class="input-flex-wrap">
+              <input type="text" placeholder="Responsibility" [formControlName]="generalRespIndex">
+            </div>
+            <button type="button">Remove</button>
+          </div>
+          <button type="button" class="secondary" (click)="onAddJobResponsibility(jobIndex)">Add Responsibility</button>
+        </ng-container>
       </div>
-      <button type="button" class="secondary">Add Project</button>
+      <div class="form-subgroup" formArrayName="projects">
+        <div class="title-wrap">
+          <h3>Projects</h3>
+          <app-plus (click)="toggleProjects()" [active]="isProjectsExpanded" tooltip="Expand Projects Section">
+          </app-plus>
+        </div>
+        <ng-container *ngIf="isProjectsExpanded">
+          <ng-container *ngFor="let project of getProjects(jobIndex).controls; let projectIndex = index">
+            <ng-container [formGroupName]="projectIndex">
+              <div class="control-wrapper">
+                <input type="text" placeholder="Project Name" formControlName="projectName">
+              </div>
+              <div class="form-subgroup" formArrayName="projectTechnologies">
+                <h4>Technologies</h4>
+                <div
+                  class="control-wrapper flex"
+                  *ngFor="let technology of getProjectTechnologies(jobIndex, projectIndex).controls; let techIndex = index"
+                >
+                  <div class="input-flex-wrap">
+                    <input type="text" placeholder="Technology" [formControlName]="techIndex">
+                  </div>
+                  <button type="button">Remove</button>
+                </div>
+                <button type="button" class="secondary" (click)="onAddProjectTechnology(jobIndex, projectIndex)">Add Technology</button>
+              </div>
+              <div class="form-subgroup" formArrayName="projectResponsibilities">
+                <h4>Responsibilities</h4>
+                <div
+                  class="control-wrapper flex"
+                  *ngFor="let responsibility of getProjectResponsibilities(jobIndex, projectIndex).controls; let respIndex = index"
+                >
+                  <div class="input-flex-wrap">
+                    <input type="text" placeholder="Technology" [formControlName]="respIndex">
+                  </div>
+                  <button type="button">Remove</button>
+                </div>
+                <button type="button" class="secondary" (click)="onAddProjectResponsibility(jobIndex, projectIndex)">Add Responsibility</button>
+              </div>
+              <div class="control-wrapper">
+                <button type="button" class="secondary">Remove Project</button>
+              </div>
+            </ng-container>
+          </ng-container>
+          <button type="button" class="secondary" (click)="onAddProject(jobIndex)">Add Project</button>
+        </ng-container>
+      </div>
+      <div class="control-wrapper">
+        <button type="button" class="secondary">Remove Job</button>
+      </div>
+      <hr *ngIf="!isLast" class="big-margins">
     </ng-container>
-  </div>
-  <button type="button" class="secondary">Add Job</button>
+  </ng-container>
   <hr>
   <button type="submit">Submit</button>
+  <button type="button" class="secondary" (click)="addJob()">Add Job</button>
 </form>

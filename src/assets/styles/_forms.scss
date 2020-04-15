@@ -28,6 +28,7 @@ input {
 
 button {
   padding: 8px 20px;
+  margin-right: 5px;
   color: #fff;
   border: none;
   border-radius: 2px;
@@ -67,6 +68,14 @@ button {
 
 .control-wrapper {
   margin-bottom: 20px;
+
+  &.flex {
+    display: flex;
+  }
+
+  .input-flex-wrap {
+    width: 100%;
+  }
 }
 
 .form-subgroup {
