@@ -1,7 +1,9 @@
 <div class="header">
   <h1>ICV Admin Panel</h1>
-  <nav>
-    <a *ngIf="authService.isLoggedIn()" (click)="authService.logOut()">Log Out</a>
+  <nav *ngIf="authService.isLoggedIn()">
+    <a [routerLink]="['/', 'admin', 'main']" routerLinkActive="active">Main skills</a>
+    <a [routerLink]="['/', 'admin', 'experience']" routerLinkActive="active">Work Experience</a>
+    <a (click)="authService.logOut()">Log Out</a>
   </nav>
 </div>
 <div class="container">

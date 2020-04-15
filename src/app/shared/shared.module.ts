@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { PlusComponent } from './icons/plus/plus.component';
 import { HTTP_INTERCEPTOR_PROVIDER } from './services/auth.interceptor';
 import { AuthService } from './services/auth.service';
 import { SkillsService } from './services/skills.service';
@@ -8,6 +9,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 
 const ownExport = [
   SpinnerComponent,
+  PlusComponent,
 ];
 
 const reexport = [
@@ -17,7 +19,7 @@ const reexport = [
 
 @NgModule({
   declarations: [
-    ...ownExport
+    ...ownExport,
   ],
   exports: [
     ...ownExport,

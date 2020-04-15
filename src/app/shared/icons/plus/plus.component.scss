@@ -1,0 +1,37 @@
+:host {
+  display: inline-block;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 20px;
+  height: 20px;
+  line-height: 0;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #000;
+    transform: translateY(-50%);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    bottom: 0;
+    width: 3px;
+    background: #000;
+    transform: translateX(-50%);
+  }
+
+  &.active {
+    &::after {
+      display: none;
+    }
+  }
+}

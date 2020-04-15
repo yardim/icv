@@ -12,10 +12,18 @@
   }
 
   a {
+    margin-left: 15px;
+    color: #fff;
+    text-decoration: none;
     cursor: pointer;
 
     &:hover {
       text-decoration: underline;
+    }
+
+    &.active {
+      text-decoration: underline;
+      pointer-events: none;
     }
   }
 }
