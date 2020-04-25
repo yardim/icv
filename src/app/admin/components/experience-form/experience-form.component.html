@@ -26,7 +26,7 @@
         <div class="input-flex-wrap">
           <input type="text" placeholder="Technology" [formControlName]="generalTechIndex">
         </div>
-        <button type="button">Remove</button>
+        <button type="button" (click)="onRemoveTechnology(generalTechIndex)">Remove</button>
       </div>
       <button type="button" class="secondary" (click)="onAddJobTechnology()">Add Technology</button>
     </ng-container>
@@ -45,7 +45,7 @@
         <div class="input-flex-wrap">
           <input type="text" placeholder="Responsibility" [formControlName]="generalRespIndex">
         </div>
-        <button type="button">Remove</button>
+        <button type="button" (click)="onRemoveResponsibility(generalRespIndex)">Remove</button>
       </div>
       <button type="button" class="secondary" (click)="onAddJobResponsibility()">Add Responsibility</button>
     </ng-container>
@@ -75,7 +75,7 @@
               <div class="input-flex-wrap">
                 <input type="text" placeholder="Technology" [formControlName]="techIndex">
               </div>
-              <button type="button">Remove</button>
+              <button type="button" (click)="onRemoveProjectTechnology(projectIndex, techIndex)">Remove</button>
             </div>
             <button type="button" class="secondary" (click)="onAddProjectTechnology(projectIndex)">Add Technology</button>
           </div>
@@ -88,12 +88,12 @@
               <div class="input-flex-wrap">
                 <input type="text" placeholder="Technology" [formControlName]="respIndex">
               </div>
-              <button type="button">Remove</button>
+              <button type="button" (click)="onRemoveProjectResponsibility(projectIndex, respIndex)">Remove</button>
             </div>
             <button type="button" class="secondary" (click)="onAddProjectResponsibility(projectIndex)">Add Responsibility</button>
           </div>
           <div class="control-wrapper">
-            <button type="button" class="secondary">Remove Project</button>
+            <button type="button" class="secondary" (click)="onRemoveProject(projectIndex)">Remove Project</button>
           </div>
         </ng-container>
       </ng-container>

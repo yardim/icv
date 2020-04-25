@@ -41,8 +41,16 @@ export class ExperienceFormComponent implements OnInit {
     this.getGeneralTechnologies().push(new FormControl(null, Validators.required));
   }
 
+  onRemoveTechnology(generalTechIndex: number) {
+    this.getGeneralTechnologies().removeAt(generalTechIndex);
+  }
+
   onAddJobResponsibility() {
     this.getGeneralResponsibilities().push(new FormControl(null, Validators.required));
+  }
+
+  onRemoveResponsibility(generalRespIndex: number) {
+    this.getGeneralResponsibilities().removeAt(generalRespIndex);
   }
 
   onAddProject() {
@@ -55,12 +63,24 @@ export class ExperienceFormComponent implements OnInit {
     this.getProjects().push(project);
   }
 
+  onRemoveProject(projectIndex: number) {
+    this.getProjects().removeAt(projectIndex);
+  }
+
   onAddProjectTechnology(projectIndex: number) {
     this.getProjectTechnologies(projectIndex).push(new FormControl(null, Validators.required));
   }
 
+  onRemoveProjectTechnology(projectIndex: number, techIndex: number) {
+    this.getProjectTechnologies(projectIndex).removeAt(techIndex);
+  }
+
   onAddProjectResponsibility(projectIndex: number) {
     this.getProjectResponsibilities(projectIndex).push(new FormControl(null, Validators.required));
+  }
+
+  onRemoveProjectResponsibility(projectIndex: number, respIndex: number) {
+    this.getProjectResponsibilities(projectIndex).removeAt(respIndex);
   }
 
   ngOnInit() {
