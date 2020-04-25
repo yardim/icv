@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ExperienceService } from 'src/app/shared/services/experience.service';
 
 @Component({
   selector: 'app-experience-form',
@@ -14,7 +16,10 @@ export class ExperienceFormComponent implements OnInit {
   isProjectsExpanded = false;
   isLoading = false;
 
-  constructor() { }
+  constructor(
+    private experienceService: ExperienceService,
+    private router: Router
+  ) { }
 
   getGeneralTechnologies() {
     return this.form.get('generalTechnologies') as FormArray;
@@ -117,6 +122,11 @@ export class ExperienceFormComponent implements OnInit {
       return;
     }
 
-    console.log(this.form.value);
+    this.isLoading = true;
+    this.experienceService.create(this.form.value)
+      .subscribe(() => {
+        this.isLoading = false;
+        this.router.navigate(['/', 'admin', 'experience']);
+      });
   }
 }

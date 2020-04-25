@@ -9,10 +9,10 @@ export interface SkillsResponse {
 }
 
 export interface ExpItem {
-  id: string;
+  id?: string;
   position: string;
-  startDate: Date | string;
-  endDate: Date | string;
+  startDate: string;
+  endDate: string;
   company: string;
   technologies?: string[];
   responsibilities?: string[];

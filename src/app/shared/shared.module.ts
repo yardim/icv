@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PlusComponent } from './icons/plus/plus.component';
 import { HTTP_INTERCEPTOR_PROVIDER } from './services/auth.interceptor';
 import { AuthService } from './services/auth.service';
+import { ExperienceService } from './services/experience.service';
 import { SkillsService } from './services/skills.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 
@@ -28,6 +29,6 @@ const reexport = [
   imports: [
     ...reexport
   ],
-  providers: [AuthService, SkillsService, HTTP_INTERCEPTOR_PROVIDER],
+  providers: [AuthService, SkillsService, HTTP_INTERCEPTOR_PROVIDER, ExperienceService],
 })
 export class SharedModule { }
