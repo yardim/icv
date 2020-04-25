@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-experience-form',
@@ -38,16 +38,16 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   onAddJobTechnology() {
-    this.getGeneralTechnologies().push(new FormControl(null));
+    this.getGeneralTechnologies().push(new FormControl(null, Validators.required));
   }
 
   onAddJobResponsibility() {
-    this.getGeneralResponsibilities().push(new FormControl(null));
+    this.getGeneralResponsibilities().push(new FormControl(null, Validators.required));
   }
 
   onAddProject() {
     const project = new FormGroup({
-      projectName: new FormControl(null),
+      projectName: new FormControl(null, Validators.required),
       projectTechnologies: new FormArray([]),
       projectResponsibilities: new FormArray([])
     });
@@ -56,19 +56,19 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   onAddProjectTechnology(projectIndex: number) {
-    this.getProjectTechnologies(projectIndex).push(new FormControl(null));
+    this.getProjectTechnologies(projectIndex).push(new FormControl(null, Validators.required));
   }
 
   onAddProjectResponsibility(projectIndex: number) {
-    this.getProjectResponsibilities(projectIndex).push(new FormControl(null));
+    this.getProjectResponsibilities(projectIndex).push(new FormControl(null, Validators.required));
   }
 
   ngOnInit() {
     this.form = new FormGroup({
-      position: new FormControl(null),
-      startDate: new FormControl(null),
-      endDate: new FormControl(null),
-      company: new FormControl(null),
+      position: new FormControl(null, Validators.required),
+      startDate: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, Validators.required),
+      company: new FormControl(null, Validators.required),
       generalTechnologies: new FormArray([]),
       generalResponsibilities: new FormArray([]),
       projects: new FormArray([])
