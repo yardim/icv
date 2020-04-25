@@ -1,1 +1,16 @@
-<app-experience-form></app-experience-form>
+<div class="title">
+  <h1>Work Experience</h1>
+  <button (click)="onAddJob()">Add Job</button>
+</div>
+
+<div class="jobs">
+  <a
+    class="job"
+    *ngFor="let job of jobs"
+    [routerLink]="['/', 'admin', 'experience', job.id]"
+  >
+    <div class="position">{{ job.position }}</div>
+    <div class="company">{{ job.company }}</div>
+    <div class="period">{{ job.startDate | date: 'MMM, yyyy' }} - {{ job.endDate | date: 'MMM, yyyy' }}</div>
+  </a>
+</div>

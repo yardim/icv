@@ -9,13 +9,15 @@ export interface SkillsResponse {
 }
 
 export interface ExpItem {
+  id: string;
   position: string;
-  dateRange: string[];
-  period?: string;
+  startDate: Date | string;
+  endDate: Date | string;
   company: string;
-  technologies: string[];
-  responsibilities: string[];
-  project: Project[];
+  technologies?: string[];
+  responsibilities?: string[];
+  projects?: Project[];
+  period?: string;
 }
 
 export interface Project {

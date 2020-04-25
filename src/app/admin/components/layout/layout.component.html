@@ -2,7 +2,7 @@
   <h1>ICV Admin Panel</h1>
   <nav *ngIf="authService.isLoggedIn()">
     <a [routerLink]="['/', 'admin', 'main']" routerLinkActive="active">Main skills</a>
-    <a [routerLink]="['/', 'admin', 'experience']" routerLinkActive="active">Work Experience</a>
+    <a [routerLink]="['/', 'admin', 'experience']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Work Experience</a>
     <a (click)="authService.logOut()">Log Out</a>
   </nav>
 </div>

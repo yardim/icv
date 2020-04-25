@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ExperienceFormComponent } from './components/experience-form/experience-form.component';
 import { AdminLayoutComponent } from './components/layout/layout.component';
 import { ExperienceComponent } from './pages/experience/experience.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'main', canActivate: [AdminGuard] },
       { path: 'main', component: MainComponent, canActivate: [AdminGuard] },
       { path: 'experience', component: ExperienceComponent, canActivate: [AdminGuard] },
+      { path: 'experience/:id', component: ExperienceFormComponent, canActivate: [AdminGuard] },
       { path: 'login', component: LoginComponent },
     ]
   }

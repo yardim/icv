@@ -1,0 +1,55 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin: 2em 0;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.jobs {
+  margin: 40px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.job {
+  display: block;
+  padding: 15px 10px;
+  color: #000;
+  text-decoration: none;
+
+  &:hover {
+    background: #eee;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .position {
+    display: inline-block;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      vertical-align: top;
+      width: 5px;
+      height: 5px;
+      margin: 7px 5px 0;
+      border-radius: 50%;
+      background: #000;
+    }
+  }
+
+  .company {
+    display: inline-block;
+  }
+
+  .period {
+    margin-top: 10px;
+    color: #777;
+  }
+}
