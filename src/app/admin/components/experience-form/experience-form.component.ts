@@ -12,6 +12,7 @@ export class ExperienceFormComponent implements OnInit {
   isTechnologiesExpanded = false;
   isResponsibilitiesExpanded = false;
   isProjectsExpanded = false;
+  isLoading = false;
 
   constructor() { }
 
@@ -109,5 +110,13 @@ export class ExperienceFormComponent implements OnInit {
 
   getBtnTooltip(sectionName: string) {
     return `Toggle ${sectionName} Section`;
+  }
+
+  onSubmit() {
+    if (!this.form.valid) {
+      return;
+    }
+
+    console.log(this.form.value);
   }
 }

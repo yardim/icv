@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DpDatePickerModule } from 'ng2-date-picker';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -27,7 +28,8 @@ import { AdminGuard } from './services/admin.guard';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    TooltipModule.forRoot({ 'show-delay': 300, 'tooltip-class': 'app-tooltip' })
+    TooltipModule.forRoot({ 'show-delay': 300, 'tooltip-class': 'app-tooltip' }),
+    DpDatePickerModule
   ],
   providers: [AdminGuard]
 })

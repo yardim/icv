@@ -1,13 +1,27 @@
 <h2>New Job</h2>
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="control-wrapper">
     <input type="text" placeholder="Position" formControlName="position">
   </div>
   <div class="control-wrapper">
-    <input type="text" placeholder="Start Date" formControlName="startDate">
+    <input
+      type="text"
+      placeholder="Start Date"
+      formControlName="startDate"
+      dpDayPicker
+      mode='month'
+      theme="dp-material"
+    >
   </div>
   <div class="control-wrapper">
-    <input type="text" placeholder="End Date" formControlName="endDate">
+    <input
+      type="text"
+      placeholder="End Date"
+      formControlName="endDate"
+      dpDayPicker
+      mode='month'
+      theme="dp-material"
+    >
   </div>
   <div class="control-wrapper">
     <input type="text" placeholder="Company" formControlName="company">
@@ -26,9 +40,9 @@
         <div class="input-flex-wrap">
           <input type="text" placeholder="Technology" [formControlName]="generalTechIndex">
         </div>
-        <button type="button" (click)="onRemoveTechnology(generalTechIndex)">Remove</button>
+        <button class="btn" type="button" (click)="onRemoveTechnology(generalTechIndex)">Remove</button>
       </div>
-      <button type="button" class="secondary" (click)="onAddJobTechnology()">Add Technology</button>
+      <button type="button" class="btn secondary" (click)="onAddJobTechnology()">Add Technology</button>
     </ng-container>
   </div>
   <div class="form-subgroup" formArrayName="generalResponsibilities">
@@ -45,9 +59,9 @@
         <div class="input-flex-wrap">
           <input type="text" placeholder="Responsibility" [formControlName]="generalRespIndex">
         </div>
-        <button type="button" (click)="onRemoveResponsibility(generalRespIndex)">Remove</button>
+        <button class="btn" type="button" (click)="onRemoveResponsibility(generalRespIndex)">Remove</button>
       </div>
-      <button type="button" class="secondary" (click)="onAddJobResponsibility()">Add Responsibility</button>
+      <button type="button" class="btn secondary" (click)="onAddJobResponsibility()">Add Responsibility</button>
     </ng-container>
   </div>
   <div class="form-subgroup" formArrayName="projects">
@@ -75,9 +89,9 @@
               <div class="input-flex-wrap">
                 <input type="text" placeholder="Technology" [formControlName]="techIndex">
               </div>
-              <button type="button" (click)="onRemoveProjectTechnology(projectIndex, techIndex)">Remove</button>
+              <button class="btn" type="button" (click)="onRemoveProjectTechnology(projectIndex, techIndex)">Remove</button>
             </div>
-            <button type="button" class="secondary" (click)="onAddProjectTechnology(projectIndex)">Add Technology</button>
+            <button type="button" class="btn secondary" (click)="onAddProjectTechnology(projectIndex)">Add Technology</button>
           </div>
           <div class="form-subgroup" formArrayName="projectResponsibilities">
             <h4>Responsibilities</h4>
@@ -88,18 +102,19 @@
               <div class="input-flex-wrap">
                 <input type="text" placeholder="Technology" [formControlName]="respIndex">
               </div>
-              <button type="button" (click)="onRemoveProjectResponsibility(projectIndex, respIndex)">Remove</button>
+              <button class="btn" type="button" (click)="onRemoveProjectResponsibility(projectIndex, respIndex)">Remove</button>
             </div>
-            <button type="button" class="secondary" (click)="onAddProjectResponsibility(projectIndex)">Add Responsibility</button>
+            <button type="button" class="btn secondary" (click)="onAddProjectResponsibility(projectIndex)">Add Responsibility</button>
           </div>
           <div class="control-wrapper">
-            <button type="button" class="secondary" (click)="onRemoveProject(projectIndex)">Remove Project</button>
+            <button type="button" class="btn secondary" (click)="onRemoveProject(projectIndex)">Remove Project</button>
           </div>
         </ng-container>
       </ng-container>
-      <button type="button" class="secondary" (click)="onAddProject()">Add Project</button>
+      <button type="button" class="btn secondary" (click)="onAddProject()">Add Project</button>
     </ng-container>
   </div>
   <hr>
-  <button type="submit">Submit</button>
+  <button class="btn" type="submit">Submit</button>
+  <app-spinner *ngIf="isLoading"></app-spinner>
 </form>

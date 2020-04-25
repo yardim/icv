@@ -11,11 +11,11 @@
       <div class="input-flex-wrap">
         <input type="text" [formControlName]="i">
       </div>
-      <button type="button" (click)="onRemoveSkill(i)">Remove</button>
+      <button class="btn" type="button" (click)="onRemoveSkill(i)">Remove</button>
     </div>
   </ng-container>
-  <button type="button" class="secondary" (click)="onAddSkill()">Add Skill</button>
+  <button type="button" class="btn secondary" (click)="onAddSkill()">Add Skill</button>
   <hr>
-  <button>Submit</button>
+  <button class="btn">Submit</button>
   <app-spinner *ngIf="isLoading"></app-spinner>
 </form>
