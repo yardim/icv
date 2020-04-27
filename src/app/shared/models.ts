@@ -14,8 +14,8 @@ export interface ExpItem {
   startDate: string;
   endDate: string;
   company: string;
-  technologies?: string[];
-  responsibilities?: string[];
+  generalTechnologies?: string[];
+  generalResponsibilities?: string[];
   projects?: Project[];
   period?: string;
 }

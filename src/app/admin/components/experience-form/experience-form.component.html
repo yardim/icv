@@ -1,5 +1,5 @@
 <h2>New Job</h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
   <div class="control-wrapper">
     <input type="text" placeholder="Position" formControlName="position">
   </div>
