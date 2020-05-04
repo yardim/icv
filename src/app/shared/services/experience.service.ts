@@ -45,4 +45,8 @@ export class ExperienceService {
   update(id: string, experience: ExpItem) {
     return this.http.put(`${this.jobUrl}/${id}.json`, experience);
   }
+
+  removeJob(id: string) {
+    return this.http.delete(`${this.jobUrl}/${id}.json`);
+  }
 }

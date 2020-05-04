@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { ExpItem } from 'src/app/shared/models';
 import { ExperienceService } from 'src/app/shared/services/experience.service';
 
@@ -28,5 +29,27 @@ export class ExperienceComponent implements OnInit {
 
   onAddJob() {
     this.router.navigate(['/', 'admin', 'experience', 'new']);
+  }
+
+  onRemoveJob(event: MouseEvent, id: string) {
+    console.log('onRemoveJob');
+    event.stopPropagation();
+    event.preventDefault();
+
+    this.isLoading = true;
+    this.experienceService.removeJob(id)
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
+      .subscribe(resp => {
+        console.log(resp);
+        this.removeJob(id);
+      });
+  }
+
+  removeJob(id: string) {
+    const index = this.jobs.findIndex(job => job.id === id);
+    this.jobs.splice(index, 1);
+    this.jobs = [...this.jobs];
   }
 }

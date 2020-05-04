@@ -21,7 +21,7 @@ export interface ExpItem {
 }
 
 export interface Project {
-  name: string;
-  technologies: string[];
-  responsibilities: string[];
+  projectName: string;
+  projectTechnologies?: string[];
+  projectResponsibilities?: string[];
 }

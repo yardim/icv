@@ -1,4 +1,7 @@
-<h2>New Job</h2>
+<h2>
+  New Job
+  <app-spinner *ngIf="isLoadingForm"></app-spinner>
+</h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
   <div class="control-wrapper">
     <input type="text" placeholder="Position" formControlName="position">

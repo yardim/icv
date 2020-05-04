@@ -15,5 +15,6 @@
     <div class="position">{{ job.position }}</div>
     <div class="company">{{ job.company }}</div>
     <div class="period">{{ job.startDate | date: 'MMM, yyyy' }} - {{ job.endDate | date: 'MMM, yyyy' }}</div>
+    <span class="delete-btn" (click)="onRemoveJob($event, job.id)">Remove</span>
   </a>
 </div>

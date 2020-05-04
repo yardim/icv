@@ -16,6 +16,7 @@
 }
 
 .job {
+  position: relative;
   display: block;
   padding: 15px 10px;
   color: #000;
@@ -51,6 +52,12 @@
   .period {
     margin-top: 10px;
     color: #777;
+  }
+
+  .delete-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }
 

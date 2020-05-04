@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ExpItem } from 'src/app/shared/models';
+import { finalize } from 'rxjs/operators';
+import { ExpItem, Project } from 'src/app/shared/models';
 import { ExperienceService } from 'src/app/shared/services/experience.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class ExperienceFormComponent implements OnInit {
   isResponsibilitiesExpanded = false;
   isProjectsExpanded = false;
   isLoading = false;
+  isLoadingForm = false;
 
   private jobId = 'new';
 
@@ -97,30 +99,17 @@ export class ExperienceFormComponent implements OnInit {
     this.jobId = this.activatedRoute.snapshot.params.id;
 
     if (this.jobId === 'new') {
-      this.form = new FormGroup({
-        position: new FormControl(null, Validators.required),
-        startDate: new FormControl(null, Validators.required),
-        endDate: new FormControl(null, Validators.required),
-        company: new FormControl(null, Validators.required),
-        generalTechnologies: new FormArray([]),
-        generalResponsibilities: new FormArray([]),
-        projects: new FormArray([])
-      });
-
+      this.form = this.createForm();
       return;
     }
 
+    this.isLoadingForm = true;
     this.experienceService.getJob(this.jobId)
+      .pipe(
+        finalize(() => this.isLoadingForm = false)
+      )
       .subscribe((resp: ExpItem) => {
-        this.form = new FormGroup({
-          position: new FormControl(resp.position, Validators.required),
-          startDate: new FormControl(resp.startDate, Validators.required),
-          endDate: new FormControl(resp.endDate, Validators.required),
-          company: new FormControl(resp.company, Validators.required),
-          generalTechnologies: new FormArray(this.createControlsArray(resp.generalTechnologies)),
-          generalResponsibilities: new FormArray(this.createControlsArray(resp.generalResponsibilities)),
-          projects: new FormArray([])
-        });
+        this.form = this.createForm(resp);
       });
   }
 
@@ -158,7 +147,33 @@ export class ExperienceFormComponent implements OnInit {
       .subscribe(() => this.finish());
   }
 
-  private createControlsArray(values: string[]) {
+  private createForm(experience?: ExpItem) {
+    return new FormGroup({
+      position: new FormControl(experience?.position, Validators.required),
+      startDate: new FormControl(experience?.startDate, Validators.required),
+      endDate: new FormControl(experience?.endDate, Validators.required),
+      company: new FormControl(experience?.company, Validators.required),
+      generalTechnologies: new FormArray(this.createControlsArray(experience?.generalTechnologies)),
+      generalResponsibilities: new FormArray(this.createControlsArray(experience?.generalResponsibilities)),
+      projects: new FormArray(this.createProjectsControls(experience?.projects))
+    });
+  }
+
+  private createProjectsControls(projects?: Project[]) {
+    if (!projects?.length) {
+      return [];
+    }
+
+    return projects.map(project => {
+      return new FormGroup({
+        projectName: new FormControl(project.projectName, Validators.required),
+        projectTechnologies: new FormArray(this.createControlsArray(project.projectTechnologies)),
+        projectResponsibilities: new FormArray(this.createControlsArray(project.projectResponsibilities))
+      });
+    });
+  }
+
+  private createControlsArray(values?: string[]) {
     if (!values?.length) {
       return [];
     }
