@@ -1,0 +1,30 @@
+.remove-icon {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    width: 35px;
+    height: 1px;
+    background: #ccc;
+  }
+
+  &:before {
+    left: -1px;
+    transform: rotate(45deg) translateY(-50%);
+    transform-origin: 0 0;
+  }
+
+  &:after {
+    right: -1px;
+    transform: rotate(-45deg) translateY(-50%);
+    transform-origin: 100% 0;
+  }
+}
