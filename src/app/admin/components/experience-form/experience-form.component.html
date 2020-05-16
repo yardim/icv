@@ -1,5 +1,5 @@
 <h2>
-  New Job
+  {{ title }}
   <app-spinner *ngIf="isLoadingForm"></app-spinner>
 </h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">

@@ -18,6 +18,7 @@ export class ExperienceFormComponent implements OnInit {
   isProjectsExpanded = false;
   isLoading = false;
   isLoadingForm = false;
+  title = 'New Job';
 
   private jobId = 'new';
 
@@ -103,6 +104,7 @@ export class ExperienceFormComponent implements OnInit {
       return;
     }
 
+    this.title = 'Edit Job';
     this.isLoadingForm = true;
     this.experienceService.getJob(this.jobId)
       .pipe(

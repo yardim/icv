@@ -16,8 +16,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let newReq = req;
+    console.log(newReq);
 
-    if (this.authService.isLoggedIn) {
+    if (this.authService.isLoggedIn()) {
       newReq = req.clone({
         setParams: {
           auth: this.authService.token
@@ -28,6 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(newReq)
       .pipe(
         catchError((error: HttpErrorResponse) => {
+          console.log(error);
           this.authService.logOut();
           this.router.navigate(['/', 'admin', 'login']);
 

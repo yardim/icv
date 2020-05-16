@@ -1,1 +1,11 @@
-<p>main works!</p>
+<div fullpage id="fullpage" [options]="fullpageConfig" (ref)="getRef($event)">
+  <div class="section">
+    Main Page
+  </div>
+  <div class="section">
+    <app-main-skills></app-main-skills>
+  </div>
+  <div class="section">
+    Experience Page
+  </div>
+</div>
