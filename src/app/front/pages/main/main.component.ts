@@ -13,6 +13,7 @@ export class FrontMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.fullpageConfig = {
+      navigation: true,
       anchors: ['main-page', 'main-skills', 'experience-page'],
       afterLoad: (origin, destination, direction) => { }
     };

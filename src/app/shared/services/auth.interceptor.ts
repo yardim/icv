@@ -16,7 +16,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let newReq = req;
-    console.log(newReq);
 
     if (this.authService.isLoggedIn()) {
       newReq = req.clone({

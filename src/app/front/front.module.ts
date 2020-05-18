@@ -6,9 +6,10 @@ import { FrontLayoutComponent } from './components/front-layout/front-layout.com
 import { MainSkillsComponent } from './components/main-skills/main-skills.component';
 import { FrontRoutingModule } from './front-routing.module';
 import { FrontMainComponent } from './pages/main/main.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
-  declarations: [FrontMainComponent, FrontLayoutComponent, MainSkillsComponent],
+  declarations: [FrontMainComponent, FrontLayoutComponent, MainSkillsComponent, LandingComponent],
   imports: [
     CommonModule,
     FrontRoutingModule,
