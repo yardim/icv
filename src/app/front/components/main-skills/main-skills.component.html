@@ -1,5 +1,13 @@
-<ul>
-  <li *ngFor="let skill of skills">
-    {{ skill }}
-  </li>
-</ul>
+<h2 class="title">
+  <span>
+    Main Skills
+  </span>
+</h2>
+
+<div class="list-wrap">
+  <ul class="skills-list">
+    <li class="skill-item" *ngFor="let skill of skills; let i = index" [ngStyle]="{ 'transition-delay': 0.3 + i * 0.5 + 's'}">
+      {{ skill }}
+    </li>
+  </ul>
+</div>

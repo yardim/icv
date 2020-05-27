@@ -1,0 +1,11 @@
+#fp-nav {
+  ul li a span {
+    background: #fff;
+  }
+
+  &.dark {
+    ul li a span {
+      background: #000;
+    }
+  }
+}

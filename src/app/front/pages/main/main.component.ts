@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class FrontMainComponent implements OnInit {
+  fpNav: HTMLElement;
   fullpageConfig: any;
   fullpageApi: any;
 
@@ -15,7 +16,21 @@ export class FrontMainComponent implements OnInit {
     this.fullpageConfig = {
       navigation: true,
       anchors: ['main-page', 'main-skills', 'experience-page'],
-      afterLoad: (origin, destination, direction) => { }
+      scrollOverflow: true,
+      afterRender: () => {
+       this.fpNav = document.querySelector('#fp-nav');
+      },
+      afterLoad: (origin: any, destination: any) => {
+        destination.item.classList.add('visited');
+      },
+      onLeave: (origin: any, destination: any) => {
+        if (destination.index === 0) {
+          this.fpNav.classList.remove('dark');
+          return;
+        }
+
+        this.fpNav.classList.add('dark');
+      }
     };
   }
 
