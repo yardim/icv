@@ -17,6 +17,9 @@ export class FrontMainComponent implements OnInit {
       navigation: true,
       anchors: ['main-page', 'main-skills', 'experience-page'],
       scrollOverflow: true,
+      scrollOverflowOptions: {
+        fadeScrollbars: true
+      },
       afterRender: () => {
        this.fpNav = document.querySelector('#fp-nav');
       },
@@ -36,5 +39,11 @@ export class FrontMainComponent implements OnInit {
 
   getRef(fullPageRef: any) {
     this.fullpageApi = fullPageRef;
+  }
+
+  onExperienceLoaded() {
+    setTimeout(() => {
+      this.fullpageApi.reBuild();
+    });
   }
 }
