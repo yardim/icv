@@ -32,7 +32,6 @@ export class ExperienceComponent implements OnInit {
   }
 
   onRemoveJob(event: MouseEvent, id: string) {
-    console.log('onRemoveJob');
     event.stopPropagation();
     event.preventDefault();
 
@@ -42,7 +41,6 @@ export class ExperienceComponent implements OnInit {
         finalize(() => this.isLoading = false)
       )
       .subscribe(resp => {
-        console.log(resp);
         this.removeJob(id);
       });
   }

@@ -1,50 +1,57 @@
-<ng-container *ngIf="experienceData">
+<ng-container *ngIf="experienceItems">
   <h2 class="title">Work experience</h2>
 
   <ul class="jobs-list">
-    <li class="job-item" *ngFor="let expItem of experienceData">
-      <h3 class="job">{{ expItem.position }}</h3>
-      <div class="company">{{ expItem.company }}</div>
-      <div class="period">{{ expItem.startDate }} - {{ expItem.endDate }}</div>
-      <ng-container *ngIf="expItem.generalTechnologies?.length">
-        <h4 class="general-title">Technologies used in the company</h4>
-        <ul class="general-list">
-          <li class="general-item" *ngFor="let jobTechnology of expItem.generalTechnologies">
-            {{ jobTechnology }}
-          </li>
-        </ul>
-      </ng-container>
-      <ng-container *ngIf="expItem.generalResponsibilities?.length">
-        <h4 class="general-title">Responsibilities</h4>
-        <ul class="general-list">
-          <li class="general-item" *ngFor="let responsibility of expItem.generalResponsibilities">
-            {{ responsibility }}
-          </li>
-        </ul>
-      </ng-container>
-      <ng-container *ngIf="expItem.projects?.length">
-        <h4 class="general-title">Projects in the company</h4>
-        <ul class="general-list">
-          <li class="general-item" *ngFor="let project of expItem.projects">
-            <h5 class="secondary-title">{{ project.projectName }}</h5>
-            <ng-container *ngIf="project.projectTechnologies?.length">
-              <div class="secondary-subtitle">Project Technologies</div>
-              <ul class="secondary-list" *ngIf="project.projectTechnologies">
-                <li class="secondary-item" *ngFor="let projectTechnology of project.projectTechnologies">
-                  {{ projectTechnology }}
-                </li>
-              </ul>
-            </ng-container>
-            <ng-container *ngIf="project.projectResponsibilities?.length">
-              <div class="secondary-subtitle">Project Responsibilities</div>
-              <ul class="secondary-list">
-                <li class="secondary-item" *ngFor="let projectResponsibility of project.projectResponsibilities">
-                  {{ projectResponsibility }}
-                </li>
-              </ul>
-            </ng-container>
-          </li>
-        </ul>
+    <li class="job-item" *ngFor="let expItem of experienceItems; let i = index">
+      <div class="job-main-info" (click)="onToggle(i)">
+        <div class="main-info-wrap">
+          <h3 class="job"><span class="job-name">{{ expItem.position }}</span></h3>
+          <div class="company">{{ expItem.company }}</div>
+          <div class="period">{{ expItem.startDate }} - {{ expItem.endDate }}</div>
+        </div>
+        <button class="details-btn" [ngClass]="{ 'is-active': expItem.isExpanded }"></button>
+      </div>
+      <ng-container *ngIf="expItem.isExpanded">
+        <ng-container *ngIf="expItem.generalTechnologies?.length">
+          <h4 class="general-title">Technologies used in the company</h4>
+          <ul class="general-list">
+            <li class="general-item" *ngFor="let jobTechnology of expItem.generalTechnologies">
+              {{ jobTechnology }}
+            </li>
+          </ul>
+        </ng-container>
+        <ng-container *ngIf="expItem.generalResponsibilities?.length">
+          <h4 class="general-title">Responsibilities</h4>
+          <ul class="general-list">
+            <li class="general-item" *ngFor="let responsibility of expItem.generalResponsibilities">
+              {{ responsibility }}
+            </li>
+          </ul>
+        </ng-container>
+        <ng-container *ngIf="expItem.projects?.length">
+          <h4 class="general-title">Projects in the company</h4>
+          <ul class="general-list">
+            <li class="general-item" *ngFor="let project of expItem.projects">
+              <h5 class="secondary-title">{{ project.projectName }}</h5>
+              <ng-container *ngIf="project.projectTechnologies?.length">
+                <div class="secondary-subtitle">Project Technologies</div>
+                <ul class="secondary-list" *ngIf="project.projectTechnologies">
+                  <li class="secondary-item" *ngFor="let projectTechnology of project.projectTechnologies">
+                    {{ projectTechnology }}
+                  </li>
+                </ul>
+              </ng-container>
+              <ng-container *ngIf="project.projectResponsibilities?.length">
+                <div class="secondary-subtitle">Project Responsibilities</div>
+                <ul class="secondary-list">
+                  <li class="secondary-item" *ngFor="let projectResponsibility of project.projectResponsibilities">
+                    {{ projectResponsibility }}
+                  </li>
+                </ul>
+              </ng-container>
+            </li>
+          </ul>
+        </ng-container>
       </ng-container>
     </li>
   </ul>

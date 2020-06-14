@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { ExpItem } from 'src/app/shared/models';
 import { ExperienceService } from 'src/app/shared/services/experience.service';
 
@@ -9,17 +10,29 @@ import { ExperienceService } from 'src/app/shared/services/experience.service';
 })
 export class ExperienceComponent implements OnInit {
   @Output() dataLoad = new EventEmitter();
+  @Output() itemExpanded = new EventEmitter();
 
-  experienceData: ExpItem[];
+  experienceItems: ExpItem[];
 
   constructor(private experienceService: ExperienceService) { }
 
   ngOnInit() {
     this.experienceService.getList()
-      .subscribe((experienceData: ExpItem[]) => {
-        this.experienceData = experienceData;
+      .pipe(
+        map(this.mapExperienceData)
+      )
+      .subscribe((experienceItems: ExpItem[]) => {
+        this.experienceItems = experienceItems;
         this.dataLoad.emit();
-        console.log(this.experienceData);
       });
+  }
+
+  onToggle(index: number) {
+    this.experienceItems[index].isExpanded = !this.experienceItems[index].isExpanded;
+    this.itemExpanded.emit();
+  }
+
+  private mapExperienceData(experienceItems: ExpItem[]) {
+    return experienceItems.map(experienceItem => ({ ...experienceItem, isExpanded: false }));
   }
 }

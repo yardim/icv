@@ -42,6 +42,14 @@ export class FrontMainComponent implements OnInit {
   }
 
   onExperienceLoaded() {
+    this.rebuildFullpage();
+  }
+
+  onItemExpanded() {
+    this.rebuildFullpage();
+  }
+
+  private rebuildFullpage() {
     setTimeout(() => {
       this.fullpageApi.reBuild();
     });

@@ -11,8 +11,6 @@ export class AdminGuard implements CanActivate {
   ) { }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('canActivate');
-
     if (this.authService.isLoggedIn()) {
       return true;
     }

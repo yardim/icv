@@ -18,6 +18,7 @@ export interface ExpItem {
   generalResponsibilities?: string[];
   projects?: Project[];
   period?: string;
+  isExpanded?: boolean;
 }
 
 export interface Project {
