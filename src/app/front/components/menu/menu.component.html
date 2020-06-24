@@ -1,0 +1,13 @@
+<span
+  class="toggle-container"
+  [ngClass]="{ 'is-active': isActive }"
+  (click)="isActive = !isActive"
+>
+  <span class="button button-toggle"></span>
+</span>
+
+<nav class="nav">
+  <a class="nav-item" href="#" *ngFor="let item of menuItems; let i = index" (click)="onNavigate($event, i)">
+    {{ item }}
+  </a>
+</nav>

@@ -49,6 +49,10 @@ export class FrontMainComponent implements OnInit {
     this.rebuildFullpage();
   }
 
+  onNavigate(section: number) {
+    this.fullpageApi.moveTo(section);
+  }
+
   private rebuildFullpage() {
     setTimeout(() => {
       this.fullpageApi.reBuild();

@@ -8,9 +8,10 @@ import { FrontRoutingModule } from './front-routing.module';
 import { FrontMainComponent } from './pages/main/main.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ExperienceComponent } from './components/experience/experience.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
-  declarations: [FrontMainComponent, FrontLayoutComponent, MainSkillsComponent, LandingComponent, ExperienceComponent],
+  declarations: [FrontMainComponent, FrontLayoutComponent, MainSkillsComponent, LandingComponent, ExperienceComponent, MenuComponent],
   imports: [
     CommonModule,
     FrontRoutingModule,

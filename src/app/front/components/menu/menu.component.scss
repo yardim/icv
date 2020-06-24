@@ -1,0 +1,190 @@
+$items: 3;
+$transition-duration: 0.5s;
+$transition-delay: 0.05s;
+$shadow-opacity: 0.3;
+
+:host {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.toggle-container {
+  position: absolute;
+  right: 0;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: 25px;
+    border-radius: 100%;
+    transition: $transition-duration + 0.1;
+  }
+
+  &:before {
+    box-shadow: 0 0 0 8px rgba(0, 0, 0, $shadow-opacity), inset 0 0 0 20px rgba(0, 0, 0, $shadow-opacity);
+  }
+}
+
+.toggle-container.is-active {
+  .button-toggle {
+    box-shadow: 0 0 0 550px rgba(0, 0, 0, $shadow-opacity), inset 0 0 0 20px rgba(0, 0, 0, $shadow-opacity);
+
+    &:hover {
+      box-shadow: 0 0 0 550px rgba(0, 0, 0, $shadow-opacity), inset 0 0 0 20px rgba(0, 0, 0, $shadow-opacity), 0 0 0 8px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    &:before {
+      transform: translateY(-50%) rotate(45deg) scale(1);
+    }
+
+    &:after {
+      transform: translateY(-50%) rotate(-45deg) scale(1);
+    }
+  }
+
+  // Open nav
+  & ~ .nav {
+    pointer-events: auto;
+    transform: translate(-100px, 100px);
+
+    // Restoring nav items from "lines" in the menu icon
+    .nav-item {
+      color: #fff;
+      letter-spacing: 0;
+      height: 40px;
+      line-height: 40px;
+      margin-top: 0;
+      opacity: 1;
+      transform: scaleY(1);
+      transition: $transition-duration, opacity 0.1s;
+
+      // Setting delays for the nav items in open transition
+      @for $i from 1 through $items {
+        &:nth-child(#{$i}) {
+          $delay: ($items - $i) * $transition-delay;
+          transition-delay: $delay;
+          &:before {
+            transition-delay: $delay;
+          }
+        }
+      }
+
+      // Hiding the lines
+      &:before {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+/* Toggle button */
+.button-toggle {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 25px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 100%;
+  transition: $transition-duration + 0.1;
+
+  // Shadow on hover
+  &:hover {
+    box-shadow: 0 0 0 8px rgba(0, 0, 0, $shadow-opacity), inset 0 0 0 20px rgba(0, 0, 0, $shadow-opacity);
+  }
+
+  // Making the "X" icon using `:before` and `:after` pseudo-elements
+  // Initially hidden because `scale(0)` transformation
+  &:before, &:after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 5px;
+    transition: $transition-duration;
+  }
+
+  &:before {
+    transform: translateY(-50%) rotate(45deg) scale(0);
+  }
+
+  &:after {
+    transform: translateY(-50%) rotate(-45deg) scale(0);
+  }
+}
+
+/* Menu */
+.nav {
+  display: inline-block;
+  margin: 25px 25px 20px;
+  pointer-events: none;
+  transition: $transition-duration;
+}
+
+// Showing nav items as lines, making up the hamburger menu icon
+.nav-item {
+  position: relative;
+  float: right;
+  clear: both;
+  color: transparent;
+  font-size: 18px;
+  letter-spacing: -7px;
+  height: 7px;
+  line-height: 7px;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transform: scaleY(0.2);
+  transition: $transition-duration, opacity 1s;
+
+  // Setting delays for the nav items in close transition
+  @for $i from 1 through $items {
+    &:nth-child(#{$i}) {
+      $delay: ($i - 1) * $transition-delay;
+      transition-delay: $delay;
+      &:before {
+        transition-delay: $delay;
+      }
+    }
+  }
+
+  // Adjusting width for the first line
+  &:nth-child(1) {
+    letter-spacing: -8px;
+  }
+
+  // Adjusting width for the second line
+  &:nth-child(2) {
+    letter-spacing: -5px;
+  }
+
+  // Adjusting from the fourth element onwards
+  &:nth-child(n + 4) {
+    letter-spacing: -8px;
+    margin-top: -7px;
+    opacity: 0;
+  }
+
+  // Getting the lines for the hamburger menu icon
+  &:before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transform: translateY(-50%) scaleY(5);
+    transition: $transition-duration;
+  }
+}
